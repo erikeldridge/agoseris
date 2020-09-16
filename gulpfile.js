@@ -4,14 +4,6 @@ const babel = require('gulp-babel');
 const uglify = require('gulp-uglify');
 const rename = require('gulp-rename');
 
-// Copies static assets to build dir
-function copy() {
-  return gulp.src([
-    'src/*.css'
-  ])
-  .pipe(gulp.dest('build'));
-}
-
 // Serves from build dir and refreshes browser on changes
 function serve() {
   return browserSync.init({
@@ -31,7 +23,7 @@ function processJs() {
   .pipe(rename({
     suffix: '.min'
   }))
-  .pipe(gulp.dest('build'));
+  .pipe(gulp.dest('.'));
 }
 
 // Rebuilds JS on changes
@@ -41,7 +33,6 @@ function watch() {
 
 gulp.task('watch', watch);
 gulp.task('processJs', processJs);
-gulp.task('copy', copy);
-gulp.task('buildAndServe', gulp.series(copy,processJs,
+gulp.task('buildAndServe', gulp.series(processJs,
   gulp.parallel(serve, watch)));
 
