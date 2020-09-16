@@ -7,7 +7,6 @@ const rename = require('gulp-rename');
 // Copies static assets to build dir
 function copy() {
   return gulp.src([
-    'src/*.html',
     'src/*.css'
   ])
   .pipe(gulp.dest('build'));
@@ -16,7 +15,7 @@ function copy() {
 // Serves from build dir and refreshes browser on changes
 function serve() {
   return browserSync.init({
-    server: 'build',
+    server: '.',
     open: false,
     port: 3000
   });
