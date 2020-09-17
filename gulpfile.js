@@ -23,7 +23,7 @@ function processJs() {
   .pipe(rename({
     suffix: '.min'
   }))
-  .pipe(gulp.dest('.'));
+  .pipe(gulp.dest('app'));
 }
 
 // Rebuilds JS on changes

@@ -10,13 +10,15 @@ This repo largely adheres to conventions from
 [Google's PWA codelabs](https://codelabs.developers.google.com/dev-pwa-training/).
 
 This app is hosted on GitHub Pages, which requires an `index.html` at the root
-(or in a directory called `docs`, but that'd be even more confusing).
+(or in a directory called `docs`). All files in a PWA must be in
+[scope](https://web.dev/add-manifest/). So, files are organized like this:
 
-For the PWA service worker to be in scope, it must be in the same directory
-as `index.html`.
+* the root directory contains `index.html` and build dependencies. `index.html`
+is treated like a "product landing page" linking to the app.
+* the `app` directory contains all PWA components
+* the `src` directory contains source files used to build assets in `app`
 
-Any resources with a build step are sourced from the `src` directory and built
-into the root directory using commands in `gulpfile.js`.
+The project uses Gulp to manage workflows.
 
 ### Set up
 

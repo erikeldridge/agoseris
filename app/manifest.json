@@ -1,13 +1,13 @@
 {
   "name": "Agoseris",
   "short_name": "Agoseris",
-  "start_url": "/index.html",
+  "start_url": ".",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "papayawhip",
   "theme_color": "papayawhip",
   "icons": [{
-    "src": "/icon-144x144.png",
+    "src": "icon-144x144.png",
     "sizes": "144x144",
     "type": "image/png"
   }]
