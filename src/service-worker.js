@@ -3,7 +3,10 @@
 const CACHE_NAME = 'static-cache-v1';
 
 const FILES_TO_CACHE = [
-  'offline.html',
+  '/agoseris/app/',
+  'manifest.json',
+  'index.min.js',
+  'icon-144x144.png'
 ];
 
 self.addEventListener('install', (evt) => {
@@ -29,16 +32,11 @@ self.addEventListener('activate', (evt) => {
 });
 
 self.addEventListener('fetch', (evt) => {
-  console.log('[ServiceWorker] Fetch', evt.request.url);
-  if (evt.request.mode !== 'navigate') {
-    return;
-  }
   evt.respondWith(
-    fetch(evt.request)
-    .catch(() => {
-      return caches.open(CACHE_NAME)
-        .then((cache) => {
-          return cache.match('offline.html');
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.match(evt.request)
+        .then((response) => {
+          return response || fetch(evt.request);
         });
     })
   );

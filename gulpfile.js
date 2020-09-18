@@ -7,7 +7,12 @@ const rename = require('gulp-rename');
 // Serves from build dir and refreshes browser on changes
 function serve() {
   return browserSync.init({
-    server: '.',
+    server: {
+      baseDir: '.',
+      routes: {
+        '/agoseris/': '.'
+      }
+    },
     open: false,
     port: 3000
   });
