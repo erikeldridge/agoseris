@@ -1,8 +1,13 @@
 import {Router} from '@vaadin/router';
+import {html, render} from 'lit-html';
 
 class ListView extends HTMLElement {
+  constructor(){
+    super();
+    this.template = html`hello world`;
+  }
   connectedCallback() {
-    this.innerHTML = `hello world`;
+    render(this.template, this);
   }
 }
 customElements.define('x-list-view', ListView);
