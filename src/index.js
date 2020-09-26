@@ -1,4 +1,4 @@
-const {Router} = window.Vaadin;
+import {Router} from '@vaadin/router';
 
 class ListView extends HTMLElement {
   connectedCallback() {

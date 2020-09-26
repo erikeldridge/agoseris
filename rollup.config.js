@@ -1,13 +1,12 @@
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+
 export default {
-  external: ['vr'],
   input: 'src/index.js',
   output: {
     file: 'app/index.min.js',
-    format: 'iife',
-    globals: {
-      'vr': 'Vaadin'
-    }
+    format: 'iife'
   },
   plugins: [
+    nodeResolve()
   ]
 };
