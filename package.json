@@ -14,13 +14,13 @@
     "url": "https://github.com/erikeldridge/agoseris/issues"
   },
   "homepage": "https://github.com/erikeldridge/agoseris#readme",
+  "scripts": {
+    "build": "rollup -c"
+  },
   "devDependencies": {
-    "@babel/core": "^7.11.6",
-    "@babel/preset-env": "^7.11.5",
-    "browser-sync": "^2.26.12",
-    "gulp": "^4.0.2",
-    "gulp-babel": "^8.0.0",
-    "gulp-rename": "^2.0.0",
-    "gulp-uglify": "^3.0.2"
+    "rollup": "^2.27.1"
+  },
+  "dependencies": {
+    "@vaadin/router": "^1.7.2"
   }
 }

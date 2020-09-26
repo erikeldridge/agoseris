@@ -2,6 +2,8 @@
 
 Run the app: https://erikeldridge.com/agoseris/
 
+Status: WIP
+
 ## Develop
 
 ### Project structure
@@ -18,15 +20,7 @@ is treated like a "product landing page" linking to the app.
 * the `app` directory contains all PWA components
 * the `src` directory contains source files used to build assets in `app`
 
-The project uses Gulp to manage workflows.
-
 ### Set up
-
-Install 
-[gulp-cli](https://gulpjs.com/docs/en/getting-started/quick-start#install-the-gulp-command-line-utility)
-for building assets:
-
-    npm install gulp-cli --global
 
 Install project dependencies:
 
@@ -38,8 +32,14 @@ https://stackoverflow.com/a/53388534
 
 ### Iteration
 
-Start dev server and watch for changes (using 
-[Browsersync](https://browsersync.io/)):
+Build assets:
 
-    gulp buildAndServe
+    npm run build
+
+Run the dev server:
+
+    cd ..
+    python -m SimpleHttpServer 3000
+
+Note: to emulate Pages hosting, we run the server from the parent directory of the project.
 
