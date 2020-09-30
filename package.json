@@ -15,9 +15,14 @@
   },
   "homepage": "https://github.com/erikeldridge/agoseris#readme",
   "scripts": {
-    "build": "rollup -c"
+    "babel": "babel src -d build",
+    "rollup": "rollup -c",
+    "build": "npm run babel && npm run rollup"
   },
   "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@rollup/plugin-node-resolve": "^9.0.0",
     "rollup": "^2.27.1"
   },
