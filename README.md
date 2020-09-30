@@ -8,6 +8,9 @@ Status: WIP
 
 ### Project structure
 
+This app should be fast to load and use. With this in mind, the app adheres as
+closely as possible to browser primitives.
+
 This repo largely adheres to conventions from
 [Google's PWA codelabs](https://codelabs.developers.google.com/dev-pwa-training/).
 

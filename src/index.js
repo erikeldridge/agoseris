@@ -4,7 +4,10 @@ import {html, render} from 'lit-html';
 class ListView extends HTMLElement {
   constructor(){
     super();
-    this.template = html`hello world`;
+    this.template = html`<ul>${this.genItems()}</ul>`;
+  }
+  genItems(){
+    return html`<li>a</li>`;
   }
   connectedCallback() {
     render(this.template, this);
