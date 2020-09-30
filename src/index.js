@@ -1,6 +1,7 @@
 import {Router} from '@vaadin/router';
-import {LitElement, html, property} from 'lit-element';
+import {customElement, html, LitElement, property} from 'lit-element';
 
+@customElement('x-list-view')
 class ListView extends LitElement {
   @property()
   blogs =['a','b']
@@ -13,7 +14,6 @@ class ListView extends LitElement {
     }</ul>`;
   }
 }
-customElements.define('x-list-view', ListView);
 
 const router = new Router(document.querySelector('body'));
 router.setRoutes([
