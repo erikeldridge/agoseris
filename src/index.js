@@ -1,7 +1,8 @@
 import {Router} from '@vaadin/router';
-import {LitElement, html} from 'lit-element';
+import {LitElement, html, property} from 'lit-element';
 
 class ListView extends LitElement {
+  @property()
   blogs =['a','b']
   constructor(){
     super();
