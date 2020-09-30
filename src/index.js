@@ -1,16 +1,19 @@
 import {Router} from '@vaadin/router';
-import {html, render} from 'lit-html';
+import {html, render as renderToDom} from 'lit-html';
 
 class ListView extends HTMLElement {
+  blogs =['a','b']
   constructor(){
     super();
-    this.template = html`<ul>${this.genItems()}</ul>`;
   }
-  genItems(){
-    return html`<li>a</li>`;
+  render(){
+    const template = html`<ul>${
+      this.blogs.map(blog => html`<li>${blog}</li>`)
+    }</ul>`;
+    renderToDom(template, this);
   }
   connectedCallback() {
-    render(this.template, this);
+    this.render();
   }
 }
 customElements.define('x-list-view', ListView);
