@@ -28,7 +28,7 @@
     "rollup": "^2.27.1"
   },
   "dependencies": {
-    "@vaadin/router": "^1.7.2",
-    "lit-element": "^2.4.0"
+    "lit-element": "^2.4.0",
+    "pwa-helpers": "^0.9.1"
   }
 }
