@@ -12,6 +12,22 @@ class ListView extends LitElement {
   }
 }
 
+@customElement('x-auth')
+class AuthView extends LitElement {
+  @property()
+  isLoggedIn = false;
+  handleClick(){
+    this.isLoggedIn = !this.isLoggedIn;
+  }
+  render(){
+    return html`
+    <button @click="${this.handleClick}">
+      ${this.isLoggedIn?'logout':'login'}
+    </button>
+    `;
+  }
+}
+
 @customElement('x-app')
 class App extends LitElement {
   // Maps browser location to app state, so location changes trigger render.
@@ -25,7 +41,8 @@ class App extends LitElement {
   }
   render(){
     return html`
-      <x-list ?hidden=${this.isListHidden()} />
+      <x-list ?hidden=${this.isListHidden()} ></x-list>
+      <x-auth></x-auth>
     `;
   }
 }
