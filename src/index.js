@@ -1,6 +1,19 @@
 import {customElement, html, LitElement, property} from 'lit-element';
 import { installRouter } from 'pwa-helpers/router.js';
 
+class AuthModel extends EventTarget {
+  _token = null;
+  set token(token){
+    this._token = token;
+    this.dispatchEvent(new Event('change'));
+  }
+  get token(){
+    return this._token;
+  }
+}
+
+const authModel = new AuthModel();
+
 @customElement('x-list')
 class ListView extends LitElement {
   @property()
@@ -14,10 +27,17 @@ class ListView extends LitElement {
 
 @customElement('x-auth')
 class AuthView extends LitElement {
-  @property()
+  @property({type:Boolean})
   isLoggedIn = false;
   handleClick(){
-    this.isLoggedIn = !this.isLoggedIn;
+    // Updates app state.
+    if (authModel.token) {
+      authModel.token = null;
+    } else {
+      authModel.token = 'asd';
+    }
+    // Updates view state.
+    this.isLoggedIn = !!authModel.token;
   }
   render(){
     return html`
@@ -30,19 +50,34 @@ class AuthView extends LitElement {
 
 @customElement('x-app')
 class App extends LitElement {
-  // Maps browser location to app state, so location changes trigger render.
-  @property()
-  currentPath = '/agoseris/app/';
+  @property({type:Boolean})
+  isLoggedIn = false;
+  @property({type:String})
+  currentPath = location.pathname;
   firstUpdated() {
-    installRouter(({pathname}) => this.currentPath = pathname);
+    installRouter(this.handleRouteChange.bind(this));
+  }
+  handleRouteChange({pathname}){
+    this.currentPath = pathname;
+  }
+  handleAuthChange(){
+    this.isLoggedIn = !!authModel.token;
+  }
+  connectedCallback(){
+    super.connectedCallback();
+    authModel.addEventListener('change', this.handleAuthChange.bind(this));
+  }
+  disconnectedCallback(){
+    authModel.removeEventListener('change', this.handleAuthChange.bind(this));
+    super.disconnectedCallback();
   }
   isListHidden(){
-    return !(this.currentPath === '/agoseris/app/');
+    return !(this.currentPath === '/agoseris/app/' && this.isLoggedIn);
   }
   render(){
     return html`
-      <x-list ?hidden=${this.isListHidden()} ></x-list>
       <x-auth></x-auth>
+      <x-list ?hidden=${this.isListHidden()} ></x-list>
     `;
   }
 }
