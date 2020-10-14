@@ -1,5 +1,7 @@
 # Agoseris
 
+A playground for learning about Progressive Web Apps and Web Components.
+
 Run the app: https://erikeldridge.com/agoseris/
 
 Status: WIP
@@ -23,6 +25,12 @@ This app is hosted on GitHub Pages, which requires an `index.html` at the root
 is treated like a "product landing page" linking to the app.
 * the `app` directory contains all PWA components
 * the `src` directory contains source files used to build assets in `app`
+
+A model layer abstracts app state management from view state management. This is
+just the M and V in MVC. Inspired by Redux, but explores idea of reading and
+writing directly to app state, and using standard event listeners to propagate
+changes consistent with [Open WC's best-practices](
+https://open-wc.org/developing/best-practices.html#upwards-data).
 
 ### Set up
 
