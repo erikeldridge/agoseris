@@ -1,8 +1,8 @@
 import {customElement, html, LitElement, property} from 'lit-element';
 import {blogsModel} from '../models/blogs.js';
 
-@customElement('x-list')
-export class ListView extends LitElement {
+@customElement('x-blogs')
+export class BlogsView extends LitElement {
   @property({type:Array})
   blogs =[]
   handleBlogsChange(){

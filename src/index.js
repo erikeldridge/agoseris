@@ -1,7 +1,7 @@
 // Defines custom elements.
 import './views/app.js';
 import './views/auth.js';
-import './views/list.js';
+import './views/blogs.js';
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {

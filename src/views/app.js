@@ -31,7 +31,7 @@ export class App extends LitElement {
   render(){
     return html`
       <x-auth></x-auth>
-      <x-list ?hidden=${this.isListHidden()} ></x-list>
+      <x-blogs ?hidden=${this.isListHidden()} ></x-blogs>
     `;
   }
 }
