@@ -1,5 +1,5 @@
 class BlogsModel extends EventTarget {
-  _blogs = ['a', 'b'];
+  _blogs = ['blog-a', 'blog-b'];
   get blogs(){
     return this._blogs;
   }

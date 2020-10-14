@@ -10,7 +10,8 @@ export class App extends LitElement {
   @property({type:String})
   currentRoute = ['blogs'];
   routes = {
-    'blogs': new Route('/agoseris/app/')
+    'blogs': new Route('/agoseris/app/'),
+    'posts': new Route('/agoseris/app/:blog')
   }
   firstUpdated() {
     installRouter(this.handleRouteChange.bind(this));
@@ -33,10 +34,15 @@ export class App extends LitElement {
   isListHidden(){
     return !(this.currentRoute[0] === 'blogs' && this.isLoggedIn);
   }
+  arePostsHidden(){
+    return !(this.currentRoute[0] === 'posts' && this.isLoggedIn);
+  }
   render(){
     return html`
       <x-auth></x-auth>
       <x-blogs ?hidden=${this.isListHidden()} ></x-blogs>
+      <x-posts ?hidden=${this.arePostsHidden()}
+        blog="${this.currentRoute[1] && this.currentRoute[1].blog}"></x-posts>
     `;
   }
 }

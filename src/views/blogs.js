@@ -19,7 +19,7 @@ export class BlogsView extends LitElement {
   }
   render(){
     return html`<ul>${
-      this.blogs.map(blog => html`<li>${blog}</li>`)
+      this.blogs.map(blog => html`<li><a href="./${blog}">${blog}</a></li>`)
     }</ul>`;
   }
 }
