@@ -1,18 +1,23 @@
 import {customElement, html, LitElement, property} from 'lit-element';
 import { authModel } from '../models/auth.js';
 import { installRouter } from 'pwa-helpers/router.js';
+import Route from 'route-parser';
 
 @customElement('x-app')
 export class App extends LitElement {
   @property({type:Boolean})
   isLoggedIn = false;
   @property({type:String})
-  currentPath = location.pathname;
+  currentRoute = ['blogs'];
+  routes = {
+    'blogs': new Route('/agoseris/app/')
+  }
   firstUpdated() {
     installRouter(this.handleRouteChange.bind(this));
   }
   handleRouteChange({pathname}){
-    this.currentPath = pathname;
+    this.currentRoute = Object.entries(this.routes).find(
+      entry => entry[1].match(pathname));
   }
   handleAuthChange(){
     this.isLoggedIn = !!authModel.token;
@@ -26,7 +31,7 @@ export class App extends LitElement {
     super.disconnectedCallback();
   }
   isListHidden(){
-    return !(this.currentPath === '/agoseris/app/' && this.isLoggedIn);
+    return !(this.currentRoute[0] === 'blogs' && this.isLoggedIn);
   }
   render(){
     return html`
