@@ -8,7 +8,7 @@ export class App extends LitElement {
   @property({type:Boolean})
   isLoggedIn = false;
   @property({type:String})
-  currentRoute = ['blogs'];
+  currentRoute = {name:'blogs'};
   routes = {
     'blogs': new Route('/agoseris/app/'),
     'posts': new Route('/agoseris/app/:blog')
@@ -17,8 +17,13 @@ export class App extends LitElement {
     installRouter(this.handleRouteChange.bind(this));
   }
   handleRouteChange({pathname}){
-    this.currentRoute = Object.entries(this.routes).find(
-      entry => entry[1].match(pathname));
+    for (let name in this.routes) {
+      const params = this.routes[name].match(pathname);
+      if (params) {
+        this.currentRoute = {name, params};
+        break;
+      }
+    }
   }
   handleAuthChange(){
     this.isLoggedIn = !!authModel.token;
@@ -32,17 +37,17 @@ export class App extends LitElement {
     super.disconnectedCallback();
   }
   isListHidden(){
-    return !(this.currentRoute[0] === 'blogs' && this.isLoggedIn);
+    return !(this.currentRoute.name === 'blogs' && this.isLoggedIn);
   }
   arePostsHidden(){
-    return !(this.currentRoute[0] === 'posts' && this.isLoggedIn);
+    return !(this.currentRoute.name === 'posts' && this.isLoggedIn);
   }
   render(){
     return html`
       <x-auth></x-auth>
       <x-blogs ?hidden=${this.isListHidden()} ></x-blogs>
       <x-posts ?hidden=${this.arePostsHidden()}
-        blog="${this.currentRoute[1] && this.currentRoute[1].blog}"></x-posts>
+        blog="${this.currentRoute.params?.blog}"></x-posts>
     `;
   }
 }

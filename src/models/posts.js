@@ -1,7 +1,10 @@
 class PostsModel extends EventTarget {
-  _posts = ['post-a', 'post-b'];
-  get posts(){
-    return this._posts;
+  _posts = {
+    'blog-a': ['b-a-post-a', 'b-a-post-b'],
+    'blog-b': ['b-b-post-a', 'b-b-post-b']
+  }
+  list(blog){
+    return this._posts[blog] || [];
   }
   load(){
     this.dispatchEvent(new Event('change'));
