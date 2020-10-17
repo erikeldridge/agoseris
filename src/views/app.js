@@ -11,10 +11,8 @@ export class App extends LitElement {
   currentRoute = {name:'blogs'};
   routes = {
     'blogs': new Route('/agoseris/app/'),
-    'posts': new Route('/agoseris/app/:blog')
-  }
-  firstUpdated() {
-    installRouter(this.handleRouteChange.bind(this));
+    'posts': new Route('/agoseris/app/:blog'),
+    'post': new Route('/agoseris/app/:blog/:post')
   }
   handleRouteChange({pathname}){
     for (let name in this.routes) {
@@ -27,6 +25,9 @@ export class App extends LitElement {
   }
   handleAuthChange(){
     this.isLoggedIn = !!authModel.token;
+  }
+  firstUpdated() {
+    installRouter(this.handleRouteChange.bind(this));
   }
   connectedCallback(){
     super.connectedCallback();
@@ -42,12 +43,18 @@ export class App extends LitElement {
   arePostsHidden(){
     return !(this.currentRoute.name === 'posts' && this.isLoggedIn);
   }
+  isPostHidden(){
+    return !(this.currentRoute.name === 'post' && this.isLoggedIn);
+  }
   render(){
     return html`
       <x-auth></x-auth>
       <x-blogs ?hidden=${this.isListHidden()} ></x-blogs>
       <x-posts ?hidden=${this.arePostsHidden()}
         blog="${this.currentRoute.params?.blog}"></x-posts>
+      <x-post ?hidden=${this.isPostHidden()}
+        blog-id="${this.currentRoute.params?.blog}"
+        post-id="${this.currentRoute.params?.post}"></x-post>
     `;
   }
 }

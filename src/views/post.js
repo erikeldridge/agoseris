@@ -1,14 +1,16 @@
 import {customElement, html, LitElement, property} from 'lit-element';
 import {postsModel} from '../models/posts.js';
 
-@customElement('x-posts')
-export class PostsView extends LitElement {
+@customElement('x-post')
+export class PostView extends LitElement {
+  @property({type:String, attribute:'blog-id'})
+  blogId = null;
+  @property({type:Number, attribute:'post-id'})
+  postId = null;
   @property({type:String})
-  blog = null;
-  @property({type:Array})
-  posts =[]
+  content = null;
   handleModelChange(){
-    this.posts = postsModel.list(this.blog);
+    this.content = postsModel.get(this.blogId, this.postId);
   }
   connectedCallback(){
     super.connectedCallback();
@@ -16,7 +18,7 @@ export class PostsView extends LitElement {
   }
   updated(changes){
     // Guards against infinite loops from model updates triggering property updates.
-    if (changes.has('blog')) {
+    if (changes.has('blogId') || changes.has('postId')) {
       postsModel.load();
     }
   }
@@ -25,8 +27,6 @@ export class PostsView extends LitElement {
     super.disconnectedCallback();
   }
   render(){
-    return html`<ul>${
-      this.posts.map((post,id) => html`<li><a href="./${this.blog}/${id}">${post}</a></li>`)
-    }</ul>`;
+    return html`<p>${this.content}</p>`;
   }
 }

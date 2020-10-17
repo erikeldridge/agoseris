@@ -6,6 +6,9 @@ class PostsModel extends EventTarget {
   list(blog){
     return this._posts[blog] || [];
   }
+  get(blog, id){
+    return this._posts[blog]?.[id];
+  }
   load(){
     this.dispatchEvent(new Event('change'));
   }
