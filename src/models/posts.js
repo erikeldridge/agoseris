@@ -1,6 +1,6 @@
 class PostsModel extends EventTarget {
   _posts = {
-    'blog-a': ['b-a-post-a', 'b-a-post-b'],
+    'blog-a': ['<h1>b-a-post-a</h1>', '<h1>b-a-post-b</h1>'],
     'blog-b': ['b-b-post-a', 'b-b-post-b']
   }
   list(blog){

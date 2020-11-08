@@ -31,6 +31,8 @@
   "dependencies": {
     "lit-element": "^2.4.0",
     "pwa-helpers": "^0.9.1",
-    "route-parser": "0.0.5"
+    "route-parser": "0.0.5",
+    "turndown": "^7.0.0",
+    "turndown-plugin-gfm": "^1.0.2"
   }
 }
