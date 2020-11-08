@@ -13,9 +13,11 @@ export class PostView extends LitElement {
   title = null;
   @property({type:String})
   content = null;
+  pristine = null;
   static get styles() {
     return css`
       input { display: block; }
+      .has-changed { border-color: red; }
     `;
   }
   constructor(turndownService = new TurndownService()){
@@ -25,8 +27,20 @@ export class PostView extends LitElement {
   }
   handleModelChange(){
     const post = postsModel.get(this.blogId, this.postId);
-    this.title = post.title;
-    this.content = this.turndownService.turndown(post.content);
+    const content = this.turndownService.turndown(post.content);
+    this.pristine = {title: post.title, content };
+    if(!this.title){
+      this.title = this.pristine.title;
+    }
+    if(!this.content){
+      this.content = this.pristine.content;
+    }
+  }
+  handleTitleChange(e){
+    this.title = e.target.value;
+  }
+  handleContentChange(e){
+    this.content = e.target.value;
   }
   connectedCallback(){
     super.connectedCallback();
@@ -38,9 +52,15 @@ export class PostView extends LitElement {
     super.disconnectedCallback();
   }
   render(){
+    const className = this.hasChanged ? 'has-changed' : '';
     return html`
-      <input value="${this.title}"/>
-      <textarea>${this.content}</textarea>
+      <input
+        class="${this.title !== this.pristine.title ? 'has-changed' : ''}"
+        value="${this.title}"
+        @change="${this.handleTitleChange}"/>
+      <textarea
+        class="${this.content !== this.pristine.content ? 'has-changed' : ''}"
+        @change="${this.handleContentChange}">${this.content}</textarea>
     `;
   }
 }
