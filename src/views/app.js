@@ -37,24 +37,37 @@ export class App extends LitElement {
     authModel.removeEventListener('change', this.handleAuthChange.bind(this));
     super.disconnectedCallback();
   }
-  isListHidden(){
-    return !(this.currentRoute.name === 'blogs' && this.isLoggedIn);
+  areBlogsVisible(){
+    return this.currentRoute.name === 'blogs' && this.isLoggedIn;
   }
-  arePostsHidden(){
-    return !(this.currentRoute.name === 'posts' && this.isLoggedIn);
+  arePostsVisible(){
+    return this.currentRoute.name === 'posts' && this.isLoggedIn;
   }
-  isPostHidden(){
-    return !(this.currentRoute.name === 'post' && this.isLoggedIn);
+  isPostVisible(){
+    return this.currentRoute.name === 'post' && this.isLoggedIn;
   }
   render(){
+    let view;
+    if(this.areBlogsVisible()){
+      view = html`
+        <x-blogs></x-blogs>
+      `;
+    }else if(this.arePostsVisible()){
+      view = html`
+        <x-posts blog="${this.currentRoute.params?.blog}">
+        </x-posts>
+      `;
+    }else if(this.isPostVisible()){
+      view = html`
+        <x-post
+          blog-id="${this.currentRoute.params?.blog}"
+          post-id="${this.currentRoute.params?.post}">
+        </x-post>
+      `;
+    }
     return html`
       <x-auth></x-auth>
-      <x-blogs ?hidden=${this.isListHidden()} ></x-blogs>
-      <x-posts ?hidden=${this.arePostsHidden()}
-        blog="${this.currentRoute.params?.blog}"></x-posts>
-      <x-post ?hidden=${this.isPostHidden()}
-        blog-id="${this.currentRoute.params?.blog}"
-        post-id="${this.currentRoute.params?.post}"></x-post>
+      ${view}
     `;
   }
 }

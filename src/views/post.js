@@ -15,12 +15,7 @@ export class PostView extends LitElement {
   connectedCallback(){
     super.connectedCallback();
     postsModel.addEventListener('change', this.handleModelChange.bind(this));
-  }
-  updated(changes){
-    // Guards against infinite loops from model updates triggering property updates.
-    if (changes.has('blogId') || changes.has('postId')) {
-      postsModel.load();
-    }
+    postsModel.load();
   }
   disconnectedCallback(){
     postsModel.removeEventListener('change', this.handleModelChange.bind(this));
