@@ -28,7 +28,7 @@ export class App extends LitElement {
   }
   connectedCallback(){
     super.connectedCallback();
-    // Pipes events into LitElement's lifecycle.
+    // Pipes navigation and auth events into LitElement's lifecycle.
     installRouter(this.handleRouteChange.bind(this));
     authModel.addEventListener('change', this.handleAuthChange.bind(this));
   }

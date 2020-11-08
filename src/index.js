@@ -1,6 +1,6 @@
 // Defines custom elements.
 import './views/app.js';
-import './views/auth.js';
+import './views/logged-out.js';
 import './views/blogs.js';
 import './views/posts.js';
 import './views/post.js';
