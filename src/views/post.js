@@ -1,4 +1,4 @@
-import {customElement, html, LitElement, property} from 'lit-element';
+import {css, customElement, html, LitElement, property} from 'lit-element';
 import TurndownService from 'turndown';
 import * as turndownGfm from 'turndown-plugin-gfm';
 import {postsModel} from '../models/posts.js';
@@ -10,7 +10,14 @@ export class PostView extends LitElement {
   @property({type:Number, attribute:'post-id'})
   postId = null;
   @property({type:String})
-  md = null;
+  title = null;
+  @property({type:String})
+  content = null;
+  static get styles() {
+    return css`
+      input { display: block; }
+    `;
+  }
   constructor(turndownService = new TurndownService()){
     super();
     this.turndownService = turndownService;
@@ -18,7 +25,8 @@ export class PostView extends LitElement {
   }
   handleModelChange(){
     const post = postsModel.get(this.blogId, this.postId);
-    this.md = this.turndownService.turndown(post.content);
+    this.title = post.title;
+    this.content = this.turndownService.turndown(post.content);
   }
   connectedCallback(){
     super.connectedCallback();
@@ -30,6 +38,9 @@ export class PostView extends LitElement {
     super.disconnectedCallback();
   }
   render(){
-    return html`<textarea>${this.md}</textarea>`;
+    return html`
+      <input value="${this.title}"/>
+      <textarea>${this.content}</textarea>
+    `;
   }
 }
