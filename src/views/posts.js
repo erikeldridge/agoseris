@@ -21,7 +21,7 @@ export class PostsView extends LitElement {
   }
   render(){
     return html`<ul>${
-      this.posts.map((post,id) => html`<li><a href="./${this.blog}/${id}">${post}</a></li>`)
+      this.posts.map((post,id) => html`<li><a href="./${this.blog}/${id}">${post.title}</a></li>`)
     }</ul>`;
   }
 }

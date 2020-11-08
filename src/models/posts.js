@@ -1,7 +1,13 @@
 class PostsModel extends EventTarget {
   _posts = {
-    'blog-a': ['<h1>b-a-post-a</h1>', '<h1>b-a-post-b</h1>'],
-    'blog-b': ['b-b-post-a', 'b-b-post-b']
+    'blog-a': [
+      {title:'b-a-post-a', content:'<h1>Post A</h1>'},
+      {title:'b-a-post-b', content:'<h1>Post B</h1>'}
+    ],
+    'blog-b': [
+      {title:'b-b-post-a', content:'<h1>Post A</h1>'},
+      {title:'b-b-post-b', content:'<h1>Post B</h1>'}
+    ]
   }
   list(blog){
     return this._posts[blog] || [];

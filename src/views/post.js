@@ -17,8 +17,8 @@ export class PostView extends LitElement {
     this.turndownService.use(turndownGfm.gfm);
   }
   handleModelChange(){
-    const html = postsModel.get(this.blogId, this.postId);
-    this.md = this.turndownService.turndown(html);
+    const post = postsModel.get(this.blogId, this.postId);
+    this.md = this.turndownService.turndown(post.content);
   }
   connectedCallback(){
     super.connectedCallback();
