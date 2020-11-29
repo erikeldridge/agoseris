@@ -4,7 +4,7 @@ A playground for learning about Progressive Web Apps and Web Components.
 
 Run the app: https://erikeldridge.com/agoseris/
 
-Status: WIP
+Status: paused to [focus on ML](https://blog.erikeldridge.com/tag/machine-learning/)
 
 ## Develop
 
